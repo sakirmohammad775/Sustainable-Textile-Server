@@ -39,7 +39,10 @@ async function run() {
       const result=await reviewCollection.find().toArray()
       res.send(result)
     })
-    
+    app.get('/carts',async(req,res)=>{
+      const result=await cartCollection.find().toArray()
+      res.send(result)
+    })
 
     //cart collection
     app.post('/carts',async(req,res)=>{
