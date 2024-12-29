@@ -27,9 +27,24 @@ async function run() {
     await client.connect();
 
     const itemCollection=client.db("SustainableDb").collection("item")
+    const reviewCollection=client.db("SustainableDb").collection("review")
+    const cartCollection=client.db("SustainableDb").collection("carts")
 
     app.get('/item',async(req,res)=>{
       const result=await itemCollection.find().toArray()
+      res.send(result)
+    })
+
+    app.get('/review',async(req,res)=>{
+      const result=await reviewCollection.find().toArray()
+      res.send(result)
+    })
+    
+
+    //cart collection
+    app.post('/carts',async(req,res)=>{
+      const cartItem=req.body;
+      const result=await cartCollection.insertOne(cartItem)
       res.send(result)
     })
 
